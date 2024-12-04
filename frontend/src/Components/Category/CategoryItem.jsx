@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CategoryItem = () => {
   return (
     <li className="category-item">

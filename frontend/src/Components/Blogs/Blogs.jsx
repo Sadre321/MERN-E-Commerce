@@ -1,4 +1,3 @@
-import React from "react";
 import "./Blog.css";
 import BlogItem from "./BlogItem";
 

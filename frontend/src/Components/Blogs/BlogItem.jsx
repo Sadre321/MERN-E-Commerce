@@ -1,5 +1,3 @@
-import React from 'react'
-
 const BlogItem = () => {
   return (
     <li className="blog-item">

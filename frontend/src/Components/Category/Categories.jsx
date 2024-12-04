@@ -1,4 +1,3 @@
-import React from 'react';
 import "./Category.css";
 import CategoryItem from './CategoryItem';
 

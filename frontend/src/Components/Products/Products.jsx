@@ -1,8 +1,60 @@
-import React from 'react'
-import './Product.css'
-import ProductItem from './ProductItem'
+import "./Product.css";
+import ProductItem from "./ProductItem";
+import Slider from "react-slick";
+import ProductsData from "../../data.json";
+import { useState } from "react";
+import PropTypes from "prop-types";
+
+function Next({ onClick }) {
+  return (
+    <button className="glide__arrow glide__arrow--right" onClick={onClick}>
+      <i className="bi bi-chevron-right"></i>
+    </button>
+  );
+}
+
+Next.propTypes = {
+  onClick: PropTypes.func, // onClick prop'unun bir fonksiyon olması zorunlu
+};
+
+function Prev({ onClick }) {
+  return (
+    <button className="glide__arrow glide__arrow--left" onClick={onClick}>
+      <i className="bi bi-chevron-left"></i>
+    </button>
+  );
+} 
+
+Prev.propTypes = {
+  onClick: PropTypes.func, // onClick prop'unun bir fonksiyon olması zorunlu
+};
 
 const Products = () => {
+  const [products] = useState(ProductsData);
+  
+  var settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    nextArrow: <Next />,
+    prevArrow: <Prev />,
+    responsive:[
+      {
+        breakpoint:992,
+        settings:{
+          slidesToShow:2
+        }
+      },
+      {
+        breakpoint:520,
+        settings:{
+          slidesToShow:1
+        }
+      }
+    ]
+  };
+
   return (
     <section className="products">
       <div className="container">
@@ -11,26 +63,15 @@ const Products = () => {
           <p>Summer Collection New Morden Design</p>
         </div>
         <div className="product-wrapper product-carousel">
-          <div className="glide__track">
-            <ul className="product-list glide__slides" id="product-list">
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-            </ul>
-          </div>
-          <div className="glide__arrows">
-            <button className="glide__arrow glide__arrow--left">
-              <i className="bi bi-chevron-left"></i>
-            </button>
-            <button className="glide__arrow glide__arrow--right">
-              <i className="bi bi-chevron-right"></i>
-            </button>
-          </div>
+          <Slider {...settings}>
+            {products.map((product) => (
+              <ProductItem key={product.id} product={product}/>
+            ))}
+          </Slider>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
