@@ -5,11 +5,15 @@ import './index.css'
 import App from './App.jsx'
 import MainLayouts from './Layouts/MainLayouts.jsx'
 import CartProvider from './context/CartProvider.jsx';
+import {BrowserRouter} from "react-router";
 
 createRoot(document.getElementById('root')).render(
-  <CartProvider>
-      <MainLayouts>
-      <App />
-    </MainLayouts>
-  </CartProvider>
+  
+  <BrowserRouter>
+    <CartProvider>
+        <MainLayouts>
+        <App />
+      </MainLayouts>
+    </CartProvider>
+  </BrowserRouter>
 )
