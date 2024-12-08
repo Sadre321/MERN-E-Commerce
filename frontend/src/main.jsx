@@ -3,17 +3,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './index.css'
 import App from './App.jsx'
-import MainLayouts from './Layouts/MainLayouts.jsx'
 import CartProvider from './context/CartProvider.jsx';
 import {BrowserRouter} from "react-router";
+import { Layout } from './Layouts/Layout.jsx';
 
 createRoot(document.getElementById('root')).render(
+
   
   <BrowserRouter>
     <CartProvider>
-        <MainLayouts>
+        <Layout>
         <App />
-      </MainLayouts>
+      </Layout>
     </CartProvider>
   </BrowserRouter>
 )

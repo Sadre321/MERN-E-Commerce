@@ -20,13 +20,13 @@ const MainLayouts = ({children}) => {
     },[])
 
   return (
-    <>
+    <div className="main-layout">
         <Search setIsSearchShow={setIsSearchShow} isSearchShow={isSearchShow}/>
         <Dialog isDialogShow={isDialogShow} setIsDialogShow={setIsDialogShow}/>
         <Header setIsSearchShow={setIsSearchShow}/>
         {children}
         <Footer/>
-    </>
+    </div>
 )
 }
 

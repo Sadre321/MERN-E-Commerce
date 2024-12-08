@@ -2,11 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const dotenv = require("dotenv");
+const logger = require("morgan");
 
 dotenv.config();
 
 const mainRoute = require("./routes/index");  // Ana route dosyanızı dahil ediyorsunuz
 
+app.use(logger("dev"));
 app.use(express.json());  // JSON verilerini almak için middleware
 
 app.use('/api', mainRoute);  // 'mainRoute' ana rotasını '/api' ile eşliyoruz
