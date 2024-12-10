@@ -1,1 +1,2 @@
-export const isAdmin  = window.location.pathName.startsWiths("/admin");
+// config/isAdmin.js
+export const isAdmin = window.location.pathname.startsWith("/admin");
