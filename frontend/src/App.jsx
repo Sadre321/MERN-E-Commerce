@@ -8,7 +8,10 @@ import AuthPage from './pages/AuthPage'
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import ContactPage from "./pages/ContactPage";
-import AdminUserPage from './pages/Admin/AdminUserPage'
+import UserPage from './pages/Admin/UserPage'
+import CategoryPage from './pages/Admin/Category/CategoryPage'
+import UpdateCategoryPage from './pages/Admin/Category/UpdateCategoryPage'
+import CreateCategoryPage from './pages/Admin/Category/CreateCategoryPage'
 function App() {
 
   return (
@@ -22,7 +25,10 @@ function App() {
       <Route path='/cart' element={<CartPage/>}/>
       <Route path='/contact' element={<ContactPage/>}/>
       <Route path='/admin/*'>
-        <Route path='users' element={<AdminUserPage/>}></Route>
+        <Route path='users' element={<UserPage/>}></Route>
+        <Route path='categories' element={<CategoryPage/>}></Route>
+        <Route path='categories/create' element={<CreateCategoryPage/>}></Route>
+        <Route path='categories/update/:id' element={<UpdateCategoryPage/>}></Route>
       </Route>
     </Routes>
 
