@@ -12,6 +12,8 @@ import UserPage from './pages/Admin/UserPage'
 import CategoryPage from './pages/Admin/Category/CategoryPage'
 import UpdateCategoryPage from './pages/Admin/Category/UpdateCategoryPage'
 import CreateCategoryPage from './pages/Admin/Category/CreateCategoryPage'
+import CreateProductPage from './pages/Admin/Product/CreateProductPage'
+import ProductPage from './pages/Admin/Product/ProductPage'
 function App() {
 
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path='categories' element={<CategoryPage/>}></Route>
         <Route path='categories/create' element={<CreateCategoryPage/>}></Route>
         <Route path='categories/update/:id' element={<UpdateCategoryPage/>}></Route>
+        <Route path='products' element={<ProductPage/>}></Route>
+        <Route path='products/create' element={<CreateProductPage/>}></Route>
       </Route>
     </Routes>
 
