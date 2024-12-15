@@ -42,6 +42,27 @@ router.get("/:productId", (req, res) => {
         });
 });
 
+router.put("/:productId", (req, res) => {
+    const { productId } = req.params;
+    const updatedData = req.body;  // Request body'den gelen tüm veriyi alıyoruz
+
+    console.log(updatedData); // Gelen tüm veriyi logluyoruz
+
+    Product.findByIdAndUpdate(productId, updatedData, { new: true })
+        .then(updatedProduct => {
+            if (!updatedProduct) {
+                return res.status(404).json({ error: "Product not found" });
+            }
+            res.status(200).json(updatedProduct);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ error: "Server error" });
+        });
+});
+
+
+
 router.delete("/:productId", (req, res) => {
     Product.findOneAndDelete(req.params.productId)
         .then(deletedProduct => {

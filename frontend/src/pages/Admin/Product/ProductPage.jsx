@@ -91,7 +91,7 @@ const ProductPage = () => {
           <Button
             type="primary"
             onClick={() => {
-              navigate(`/admin/categories/update/${record._id}`);
+              navigate(`/admin/products/update/${record._id}`);
             }}
           >
             Düzenle
