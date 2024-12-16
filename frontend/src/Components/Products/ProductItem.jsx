@@ -7,14 +7,19 @@ const ProductItem = ({product}) => {
 
   const {cartItems,addToCard} = useContext(CartContext);
 
-  const filteredCart = cartItems.find((cartItem)=>cartItem.id == product.id);
+  const filteredCart = cartItems.find((cartItem)=>cartItem._id === product._id);
+
+  const originalPrice = product.price.current;
+  const discountPercent = product.price.discount;
+
+  const discountedPrice = originalPrice - ((originalPrice*discountPercent)/100);
 
   return (
     <div className="product-item glide__slide glide__slide--active">
       <div className="product-image">
         <a href="#">
-          <img src={product.img.singleImage} alt="" className="img1" />
-          <img src={product.img.thumbs[1]} alt="" className="img2" />
+          <img src={product.img[0]} alt="" className="img1" />
+          <img src={product.img[1]} alt="" className="img2" />
         </a>
       </div>
       <div className="product-info">
@@ -39,13 +44,13 @@ const ProductItem = ({product}) => {
           </li>
         </ul>
         <div className="product-prices">
-          <strong className="new-price">${product.price.newPrice.toFixed(2)}</strong>
-          <span className="old-price">${product.price.oldPrice.toFixed(2)}</span>
+          <strong className="new-price">${discountedPrice.toFixed(2)}</strong>
+          <span className="old-price">${product.price.current.toFixed(2)}</span>
         </div>
-        <span className="product-discount">-{product.discount}%</span>
+        <span className="product-discount">-{product.price.discount}%</span>
         <div className="product-links">
           <button className="add-to-cart" onClick={()=>{
-              addToCard(product)
+              addToCard({...product,price:discountedPrice})
             }}
             disabled={filteredCart}
             >
@@ -54,7 +59,7 @@ const ProductItem = ({product}) => {
           <button>
             <i className="bi bi-heart-fill"></i>
           </button>
-          <Link to={`/products/${product.id}`} className="product-link">
+          <Link to={`/products/${product._id}`} className="product-link">
             <i className="bi bi-eye-fill"></i>
           </Link>
           <a href="#">

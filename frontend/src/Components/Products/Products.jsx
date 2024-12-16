@@ -1,9 +1,9 @@
 import "./Product.css";
 import ProductItem from "./ProductItem";
 import Slider from "react-slick";
-import ProductsData from "../../data.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { message } from "antd";
 
 function Next({ onClick }) {
   return (
@@ -30,7 +30,28 @@ Prev.propTypes = {
 };
 
 const Products = () => {
-  const [products] = useState(ProductsData);
+  const apiUri = import.meta.env.VITE_API_BASE_URI;
+  const [productsData,setProductsData] = useState([]);
+
+  useEffect(()=>{
+    const fetchCategories = async() => {
+      try {
+        const response = await fetch(`${apiUri}/api/products`);
+  
+        if (response.ok) {
+          const data = await response.json();
+          setProductsData(data);
+        } else {
+          message.error("Giriş yaparken bir hata oluştu");
+        }
+      } catch (error) {
+        console.log("Giriş hatası:", error);
+        message.error("Bir hata oluştu, lütfen tekrar deneyin.");
+      }
+    };
+
+    fetchCategories();
+  },[apiUri])
   
   var settings = {
     infinite: true,
@@ -64,8 +85,8 @@ const Products = () => {
         </div>
         <div className="product-wrapper product-carousel">
           <Slider {...settings}>
-            {products.map((product) => (
-              <ProductItem key={product.id} product={product}/>
+            {productsData.map((product) => (
+              <ProductItem key={product._id} product={product}/>
             ))}
           </Slider>
         </div>

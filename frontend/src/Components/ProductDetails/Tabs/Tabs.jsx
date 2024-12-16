@@ -1,8 +1,9 @@
 import "./Tabs.css"
 import Reviews from "../../Reviews/Reviews"
 import { useState } from "react"
+import PropTypes from "prop-types"
 
-const Tabs = () => {
+const Tabs = ({product}) => {
   
   const [activeTabs,setActiveTabs] = useState("desc");
   
@@ -38,26 +39,8 @@ const Tabs = () => {
     </ul>
     <div className="tab-panel">
       <div className={`tab-panel-descriptions content ${activeTabs==="desc"&&"active"}`} id="desc">
-        <p>
-          Quisque varius diam vel metus mattis, id aliquam diam rhoncus. Proin
-          vitae magna in dui finibus malesuada et at nulla. Morbi elit ex,
-          viverra vitae ante vel, blandit feugiat ligula. Fusce fermentum
-          iaculis nibh, at sodales leo maximus a. Nullam ultricies sodales
-          nunc, in pellentesque lorem mattis quis. Cras imperdiet est in nunc
-          tristique lacinia. Nullam aliquam mauris eu accumsan tincidunt.
-          Suspendisse velit ex, aliquet vel ornare vel, dignissim a tortor.
-        </p>
-        <br />
-        <p>
-          Quisque varius diam vel metus mattis, id aliquam diam rhoncus. Proin
-          vitae magna in dui finibus malesuada et at nulla. Morbi elit ex,
-          viverra vitae ante vel, blandit feugiat ligula. Fusce fermentum
-          iaculis nibh, at sodales leo maximus a. Nullam ultricies sodales
-          nunc, in pellentesque lorem mattis quis. Cras imperdiet est in nunc
-          tristique lacinia. Nullam aliquam mauris eu accumsan tincidunt.
-          Suspendisse velit ex, aliquet vel ornare vel, dignissim a tortor.
-        </p>
-      </div>
+        <p className="product-description" dangerouslySetInnerHTML={{__html:product.description}}></p>
+        </div>
       <div className={`tab-panel-information content ${activeTabs==="info"&&"active"}`} id="info">
         <h3>Additional information</h3>
         <table>
@@ -74,16 +57,26 @@ const Tabs = () => {
             <tr>
               <th>Size</th>
               <td>
-                <p>XXS, XS, S, M, L, XL, XXL</p>
+              <p>
+                    {product.sizes.map((item, index) => (
+                      <span key={index}>
+                        {item.toUpperCase()}
+                        {index < product.sizes.length - 1 && ", "}
+                      </span>
+                    ))}
+                  </p>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <Reviews activeTabs={activeTabs==="reviews"&&"active"}/>
+      <Reviews activeTabs={activeTabs==="reviews"&&"active"} product={product}/>
     </div>
   </div>
   )
 }
 
 export default Tabs
+Tabs.propTypes ={
+  product:PropTypes.object
+}
